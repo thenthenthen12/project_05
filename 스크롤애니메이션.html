@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 10rem;
+            height: 10rem;
+            margin: 5rem auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            background-color: #febf00;
+            transition: .4s;
+        }
+
+        .box.active {
+            width: 20rem;
+            background: #f03d3d;
+            color: #fff;
+        }
+
+        /* ------------- */
+
+        * {
+            margin: 0;
+            padding: 0;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f8f8f8;
+        }
+
+        @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+        * {
+            font-family: Pretendard;
+        }
+    </style>
+    <script src="lib/jquery-3.7.0.min.js"></script>
+    <script>
+        $(function () {
+            const options = {
+                root: null, // viewport
+                rootMargin: "0px",
+                threshold: 1.0,  // 50%가 viewport에 들어와 있어야 callback 실행
+            }
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    } else {
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, options);
+
+            const boxList = document.querySelectorAll('.box');
+
+            // 반복문을 돌려 모든 DOM에 적용
+            boxList.forEach(el => observer.observe(el));
+        })
+    </script>
+</head>
+
+<body>
+    <div calss="wrap">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+        <div class="box">6</div>
+        <div class="box">7</div>
+        <div class="box">8</div>
+        <div class="box">9</div>
+        <div class="box">10</div>
+    </div>
+</body>
+
+</html>

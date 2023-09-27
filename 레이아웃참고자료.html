@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+   background: url(http://byme.se/filer/bg/damask_opacity.png) repeat top center;
+   background-color: #161616;
+   height:100vh;width:100%;
+   margin: 0;padding: 0;
+   text-align: center; 
+   overflow: hidden;
+}
+
+h1 {
+    font-size: 5vw;
+    font-family: neon;
+    letter-spacing: 10px;
+    font-weight: 500;
+    color: #FB4264;
+    text-shadow: 0 0 3vw #F40A35;
+    animation: neon 1s ease infinite;
+}
+
+@keyframes neon {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
+    color: #FED128;
+  }
+  50% {
+    text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
+    color: #806914;
+  }
+}
+
+/*---------------------------------------------------------------*/
+
+p {
+   position: relative;
+  font-weight: 700;
+  text-align: center;
+  font-size: 3vw;
+  font-family: Hack, sans-serif;
+  line-height: 3vw;
+  /*text-transform: uppercase;*/
+  
+  background: linear-gradient(90deg, #000, #000,#000, #fff, #000, #000);
+  letter-spacing: 5px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-repeat: no-repeat;
+  background-size: 70%;
+  animation: shine 8s linear infinite;
+}
+@keyframes shine {
+    0% {background-position-x: -400%;}
+    50% {background-position-x: 500%;}
+    100%{background-position-x:-400%}
+}
+
+/*-----------------------------------------------------------------*/
+
+@font-face {
+  font-family: neon;
+  src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
+}
+.container{
+    position: relative;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-wrap: wrap;
+    font-family: 'Permanent Marker', cursive;
+}
+
+
+.pricing-price-row{
+   margin: 20px;
+   transform-style: preserve-3d;
+    transform: rotateY(0deg) translateZ(-100px);
+}
+
+.pricing-price-wrapper
+{
+    width: 270px;height: 250px;
+    background-color: rgba(71, 71, 72, 0.1);
+    border-top-right-radius: 48%;
+    border-top-left-radius: 48%;
+    padding-top: 45px;
+    text-align: center;
+    box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.13), -20px -20px 60px rgba(29, 29, 29, 0.08);
+  
+}
+
+.pricing-price
+{
+    position: relative;
+    background-color: #00bcd4;
+    box-shadow: 0px 0px 0px 10px rgba(0, 188, 212, 0.31);
+  filter: drop-shadow(0px 0px 20px #00bcd4);
+    color: #fff;
+    border-radius: 50%;
+    width: 180px;height: 180px;
+    display: inline-block;
+    overflow: hidden;
+  z-index: 10;
+}
+
+.css {
+    background-color: #a637ec;
+    box-shadow: 0px 0px 0px 10px rgba(166, 55, 236, 0.31);
+    filter: drop-shadow(0px 0px 20px #a637ec);
+}  
+
+.javascript {
+    background-color: #ff994e;
+    box-shadow: 0px 0px 0px 10px rgba(255, 153, 78, 0.31);
+    filter: drop-shadow(0px 0px 20px #ff994e);
+}
+
+.pricing-cost {
+    position: absolute;
+    top:50px;left:70px;
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.wave {
+      width: 180px;height: 180px;
+      position: absolute;
+      z-index: -1;
+ }
+
+.wave::before, .wave::after {
+      width: 200%;height: 200%;
+      content: '';
+      position: absolute;
+      top: -25%;left:50%;
+      transform: translate(-50%,-50);
+ }
+
+.css::before, .css::after {
+    position: absolute;
+    top: -5%;left:50%;
+  transform: translate(-50%,-50);
+}
+
+.javascript::before, .javascript::after {
+    position: absolute;
+    top: 20%;left:50%;
+  transform: translate(-50%,-50);
+}
+
+ .wave::before {
+      border-radius: 45%;
+      background-color: rgba(20,20,20,.5);
+      animation: wave 5s linear infinite;
+  }
+
+ .wave::after {
+      border-radius: 38%;
+      background-color: rgba(20,20,20,0.5);
+      animation: wave 10s linear infinite;
+ }
+
+@keyframes wave {
+    0% {transform: translate(-50%,-75%) rotate(0deg);}
+    100% {transform: translate(-50%,-75%) rotate(360deg);}
+  }
+
+/*------------------------------------*/
+
+.pricing-row-title
+{
+    background-color: rgba(48, 50, 65, 0.4);
+    padding: 26px 10px;
+    border-top:1px solid rgba(255, 255, 255, .3);
+    border-bottom-left-radius: 50px ;
+    border-bottom-right-radius: 50px ;
+    text-align: center;
+}
+
+.pricing_row_title {
+    color: #00bcd4;
+  text-shadow: 0 0 30px #00bcd4;
+  font-size: 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-family: neon;
+}
+.css-color {
+  color:#a637ec;
+  text-shadow: 0 0 30px #a637ec;
+}
+.javascript-color {
+  color:#ff994e;
+  text-shadow: 0 0 30px #ff994e;
+}
+
+    </style>
+</head>
+<body>
+    
+<div class="container">
+
+    <div class="pricing-price-row">
+        <div class="pricing-price-wrapper">
+             <div class="pricing-price">
+                  <div class="pricing-cost"><span class="count">81</span><br>%</div>
+                  <div class="wave"></div>
+              </div>
+        </div>
+        <div class="pricing-row-title">
+             <div class="pricing_row_title">HTML</div>
+        </div>
+      <div>
+      </div>
+    </div>
+   
+   <div class="pricing-price-row">
+        <div class="pricing-price-wrapper">
+             <div class="pricing-price css">
+                  <div class="pricing-cost"><span class="count">64</span><br>%</div>
+                  <div class="wave css"></div>
+              </div>
+        </div>
+        <div class="pricing-row-title">
+             <div class="pricing_row_title css-color">CSS</div>
+        </div>
+    </div>
+   
+   <div class="pricing-price-row">
+        <div class="pricing-price-wrapper">
+             <div class="pricing-price javascript">
+                  <div class="pricing-cost"><span class="count">34</span><br>%</div>
+                  <div class="wave javascript"></div>
+              </div>
+        </div>
+        <div class="pricing-row-title">
+             <div class="pricing_row_title javascript-color">JAVASCRIPT</div>
+        </div>
+    </div>
+   
+ </div>
+</body>
+</html>

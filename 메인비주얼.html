@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인비주얼</title>
+    <link rel="stylesheet" href="css/메인비주얼.css">
+    <script src="lib/jquery-3.7.0.min.js"></script>
+    <script>
+        $(function(){
+
+            //메인비주얼 텍스트 글리치 스크립트
+            class TextScramble {
+  constructor(el) {
+    this.el = el;
+    this.chars = '!<>-_\\/[]{}—=+*^?#________';
+    this.update = this.update.bind(this);
+  }
+  setText(newText) {
+    const oldText = this.el.innerText;
+    const length = Math.max(oldText.length, newText.length);
+    const promise = new Promise(resolve => this.resolve = resolve);
+    this.queue = [];
+    for (let i = 0; i < length; i++) {
+      const from = oldText[i] || '';
+      const to = newText[i] || '';
+      const start = Math.floor(Math.random() * 40);
+      const end = start + Math.floor(Math.random() * 40);
+      this.queue.push({ from, to, start, end });
+    }
+    cancelAnimationFrame(this.frameRequest);
+    this.frame = 0;
+    this.update();
+    return promise;
+  }
+  update() {
+    let output = '';
+    let complete = 0;
+    for (let i = 0, n = this.queue.length; i < n; i++) {
+      let { from, to, start, end, char } = this.queue[i];
+      if (this.frame >= end) {
+        complete++;
+        output += to;
+      } else if (this.frame >= start) {
+        if (!char || Math.random() < 0.28) {
+          char = this.randomChar();
+          this.queue[i].char = char;
+        }
+        output += `<span class="dud">${char}</span>`;
+      } else {
+        output += from;
+      }
+    }
+    this.el.innerHTML = output;
+    if (complete === this.queue.length) {
+      this.resolve();
+    } else {
+      this.frameRequest = requestAnimationFrame(this.update);
+      this.frame++;
+    }
+  }
+  randomChar() {
+    return this.chars[Math.floor(Math.random() * this.chars.length)];
+  }}
+
+
+const phrases = [
+'Hello',
+'Welcome',
+'This is CyberPunk 2077',
+'Please Enjoy',
+'&',
+'Computer / Science',
+'&',
+'Ethical Hacking \ { * }',
+'an initiative to help secure the Cyber',
+'by Umar Farooq',
+'@umarcbs'];
+
+
+const el = document.querySelector('.text-change');
+const fx = new TextScramble(el);
+
+let counter = 0;
+const next = () => {
+  fx.setText(phrases[counter]).then(() => {
+    setTimeout(next, 2000);
+  });
+  counter = (counter + 1) % phrases.length;
+};
+
+next();
+
+
+        })
+    </script>
+</head>
+<body>
+    <div id="wrap">
+        <header>
+            <div class="inner">
+                <h1>
+                    <a href="#">
+                        <img src="img/logo.png" alt="">
+                    </a>
+                </h1>
+                <nav>
+                    <a class="cybr-btn" href="#">Game
+                        <span aria-hidden class="cybr-btn__glitch">Game</span>
+                    </a>
+                    <a class="cybr-btn" href="#">More
+                        <span aria-hidden class="cybr-btn__glitch">More</span>
+                    </a>
+                    <a class="cybr-btn" href="#">Events
+                        <span aria-hidden class="cybr-btn__glitch">Events</span>
+                    </a>
+                    <a class="cybr-btn" href="#">News
+                        <span aria-hidden class="cybr-btn__glitch">News</span>
+                    </a>
+                    <a class="cybr-btn" href="#">Shows
+                        <span aria-hidden class="cybr-btn__glitch">Shows</span>
+                    </a>
+                    <a class="cybr-btn" href="#">Community
+                        <span aria-hidden class="cybr-btn__glitch">Community</span>
+                    </a>
+                    <a class="cybr-btn" href="#">Buy Now
+                        <span aria-hidden class="cybr-btn__glitch">Buy Now</span>
+                    </a>
+                </nav>
+            </div><!-- .inner end -->
+        </header>
+        <section class="main_visual">
+            <img src="img/back.png" alt="">
+            <div class="inner">
+                <div><span>줄</span></div>
+                <div><span>줄</span></div>
+                <div><span>줄</span></div>
+                <div><span>줄</span></div>
+            </div><!-- .inner end -->
+            <div class="inner_02">
+                <div><span>줄</span></div>
+                <div><span>줄</span></div>
+                <div><span>줄</span></div>
+                <div><span>줄</span></div>
+            </div><!-- .inner_02 end -->
+            <div class="glitch">
+                <div class="text-change-container">
+                    <div class="text-change"></div>
+                </div>
+                <div class="text-change-container">
+                    <div class="text-change"></div>
+                </div>            
+            </div>
+        </section>
+    </div><!-- #wrap end -->
+    
+</body>
+</html>

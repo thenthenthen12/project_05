@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 3000px;
+            position: relative;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .rabbit{
+            width: 320px;
+            height: 450px;
+            margin: 100px auto;
+            position: sticky;
+            top: 100px;
+        }
+        .rabbit img{
+            display: none;
+        }
+        .rabbit img:first-child{
+            display: block;
+        }
+    </style>
+    <script src="lib/jquery-3.7.0.min.js"></script>
+    <script>
+        $(function(){
+            $(window).scroll(function(){
+                let height = $(window).scrollTop();
+                let img = $('img');
+                console.log(height);
+
+
+                if(height == 100){
+                    img.css({
+                        'display' : 'none'
+                    })
+                    img.eq(1).css({
+                        'display' : 'block'
+                    })
+                }
+                else if(height == 200){
+                    img.css({
+                        'display' : 'none'
+                    })
+                    img.eq(2).css({
+                        'display' : 'block'
+                    })
+                }
+                else if(height == 300){
+                    img.css({
+                        'display' : 'none'
+                    })
+                    img.eq(3).css({
+                        'display' : 'block'
+                    })
+                }
+                else if(height == 400){
+                    img.css({
+                        'display' : 'none'
+                    })
+                    img.eq(4).css({
+                        'display' : 'block'
+                    })
+                }
+                else if(height == 500){
+                    img.css({
+                        'display' : 'none'
+                    })
+                    img.eq(5).css({
+                        'display' : 'block'
+                    })
+                }
+                else if(height == 600){
+                    img.css({
+                        'display' : 'none'
+                    })
+                    img.eq(6).css({
+                        'display' : 'block'
+                    })
+                }
+                else if(height == 700){
+                    img.css({
+                        'display' : 'none'
+                    })
+                    img.eq(7).css({
+                        'display' : 'block'
+                    })
+                }
+                else if(height == 800){
+                    img.css({
+                        'display' : 'none'
+                    })
+                    img.eq(8).css({
+                        'display' : 'block'
+                    })
+                }
+                else if(height == 900){
+                    img.css({
+                        'display' : 'none'
+                    })
+                    img.eq(9).css({
+                        'display' : 'block'
+                    })
+                }
+                else if(height == 1000){
+                    img.css({
+                        'display' : 'none'
+                    })
+                    img.eq(10).css({
+                        'display' : 'block'
+                    })
+                }
+            })
+        });
+    </script>
+</head>
+<body>
+    <div class="rabbit">
+        <img src="img/스크롤애니메이션연습/토끼1.jpg" alt="">
+        <img src="img/스크롤애니메이션연습/토끼2.jpg" alt="">
+        <img src="img/스크롤애니메이션연습/토끼3.jpg" alt="">
+        <img src="img/스크롤애니메이션연습/토끼4.jpg" alt="">
+        <img src="img/스크롤애니메이션연습/토끼5.jpg" alt="">
+        <img src="img/스크롤애니메이션연습/토끼6.jpg" alt="">
+        <img src="img/스크롤애니메이션연습/토끼7.jpg" alt="">
+        <img src="img/스크롤애니메이션연습/토끼8.jpg" alt="">
+        <img src="img/스크롤애니메이션연습/토끼9.jpg" alt="">
+        <img src="img/스크롤애니메이션연습/토끼10.jpg" alt="">
+    </div>
+</body>
+</html>

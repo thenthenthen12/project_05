@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="lib/jquery-3.7.0.min.js"></script>
+    <style>
+:root {
+    --grid-color: #35a4f7;
+    --title-font: 'Audiowide', cursive;
+    --subtitle-font:'Rock Salt', cursive;
+}
+
+body {
+    margin: 0;
+    background: radial-gradient(ellipse at center, #0b1f59 0%,#0f3c77 27%,#8b008b 95%);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.cover {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #000;
+    z-index: 2;
+}
+
+.container {
+    width: 352%;
+    position: absolute;
+    bottom: 0;
+    left: -126%;
+    transform-style: preserve-3d;
+    perspective-origin: bottom;
+    backface-visibility: visible;
+    display: none;  
+}
+
+#sun {
+    height: 200px;
+    width: 200px;
+    background: linear-gradient(to bottom, magenta 0%,yellow 100%);
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: 0 0 300px 50px orangered;
+    transform: translate(0,50px);
+    animation: dawn 3s ease-out 1 forwards;
+
+}
+
+#horizon {
+    width: 104%;
+    height: 600px;
+    position: absolute;
+    bottom: 350px;
+    left: 0;
+    background-color: black;
+    z-index: 1;
+    border-bottom: solid 2px var(--grid-color);
+    box-shadow: inset 0 0 15px 2px var(--grid-color);
+    transform: translate(-2%,-10px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#horizon > .inner {
+    position: relative;
+    transform: translate(0,102px);
+    animation: zoom-in 3s ease-out 1 forwards;    
+}
+
+#horizon > .inner > .title {
+    font-size: 160px;
+    font-family: var(--title-font);
+    font-weight: normal;
+    color: white;
+    filter: drop-shadow(0 0 5px white);
+    margin: 0;
+    padding: 0;
+    position: relative;
+    -webkit-text-stroke: 2px #ddd;
+}
+
+#horizon > .inner > .subtitle {
+    font-size: 63px;
+    font-family: var(--subtitle-font);
+    color: #fe05cb;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    bottom: -48px;
+    right: -25px;
+    transform: rotate(-3deg);
+    filter: drop-shadow(4px 3px 0px #0f3c77);
+    animation: pulse 1.25s linear infinite forwards;    
+}
+
+.grid:nth-of-type(1) {
+    display: grid;
+    grid-template-rows: repeat(9, 1fr);
+    grid-template-columns: repeat(10, 1fr);
+    margin: 0 auto;
+    transform-origin: bottom;
+    transform: translate3d(0,32px,-350px) rotateX(15deg);
+}
+
+.grid:nth-of-type(2) {
+    display: grid;
+    grid-template-rows: repeat(9, 1fr);
+    grid-template-columns: repeat(10, 1fr);
+    margin: 0 auto;
+    transform-origin: bottom;
+    transform: translate3d(0,21px,-173px) rotateX(15deg);
+}
+
+.grid:nth-of-type(3) {
+    display: grid;
+    grid-template-rows: repeat(9, 1fr);
+    grid-template-columns: repeat(10, 1fr);
+    margin: 0 auto;
+    transform-origin: bottom;
+    transform: rotateX(15deg);
+}
+
+
+.cell {
+    box-shadow: 0 0 15px 2px var(--grid-color);
+    height: 70px;
+    border: solid 2px var(--grid-color);
+    animation: sail 5s linear infinite forwards;
+}
+
+@keyframes sail {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(665px);
+    }
+}
+
+@keyframes dawn {
+    0% {
+        transform: translate(0,-400px);
+    }
+    100% {
+        transform: translate(0,-110px);
+    }
+}
+
+@keyframes zoom-in {
+    0% {
+        transform: translate(0,72px) scale(0.5);
+    }
+    100% {
+        transform: translate(0,102px) scale(1);
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: rotate(-3deg) scale(1);
+    }
+    89% {
+        transform: rotate(-3deg) scale(1);
+    }
+    90% {
+        transform: rotate(-3deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(-3deg) scale(1);
+    }
+}
+
+@keyframes hue-rotate{
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        filter: hue-rotate(360deg);
+    }    
+}
+    </style>
+    <script>
+        $(function(){
+            
+let cg = {};
+
+cg.gridContainer = document.querySelector('.container');
+cg.cover = document.querySelector('.cover');
+cg.music = document.querySelector('audio');
+
+window.addEventListener('load', () => {
+
+    // Grid render fix
+    window.setTimeout(() => {
+        cg.gridContainer.style.perspective = '137px';
+        cg.gridContainer.style.display = 'block';
+    }, 50)
+  
+    cg.fadeCover();
+    cg.music.play();
+  
+});
+
+cg.fadeCover = () => {
+    cg.cover.style.animation = 'fade-out 300ms linear 1 forwards';
+}
+        })
+    </script>
+</head>
+<body>
+    <audio src="//Yariv.io/Portfolio/cyber-grid/sound/eol.ogg"/></audio>
+    <!-- Music: End of the line - Tron: Legacy OST -->
+    
+        <div class="cover"></div>
+    
+        <div id="horizon">
+            <div id="sun"></div>
+            <div class="inner">
+                <h1 class="title">CYBER</h1>
+                <h2 class="subtitle">GRID</h2>
+            </div>
+        </div>
+        <div class="container">
+    
+            <div class="grid">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+    
+            <div class="grid">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+    
+            <div class="grid">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+        </div>
+</body>
+</html>
