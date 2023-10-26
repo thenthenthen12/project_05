@@ -360,13 +360,13 @@ header .inner nav a:nth-child(7){
 }
 .box.main .bg .inner_01 div:nth-child(2){
     width: 3px;
-    height: 920px;
+    height: 910px;
     top: 20px;
     left: 20px;
 }
 .box.main .bg .inner_01 div:nth-child(3){
     width: 3px;
-    height: 920px;
+    height: 910px;
     top: 20px;
     right: 40px;
 }
@@ -390,13 +390,13 @@ header .inner nav a:nth-child(7){
 }
 .box.main .bg .inner_02 div:nth-child(2){
     width: 3px;
-    height: 860px;
+    height: 850px;
     top: 50px;
     left: 50px;
 }
 .box.main .bg .inner_02 div:nth-child(3){
     width: 3px;
-    height: 860px;
+    height: 850px;
     top: 50px;
     right: 70px;
 }
